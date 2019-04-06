@@ -1,0 +1,88 @@
+html { height: 100%; }
+body {
+  min-height: 100%;
+  background-image: url(graphic.png);
+  background-position: 105% 105%;
+  background-repeat: no-repeat;
+  background-size: 40%;
+  padding: 15px;
+}
+.github {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.upload textarea {
+  font-family: monospace;
+  font-size: 13px;
+  font-style: italic;
+  color: #3f3c56;  
+}
+
+.languages {
+  margin-top: 25px;
+}
+
+.card-footer button.button {
+  border-radius: 0;
+  padding-top: 13px;
+  padding-bottom: 35px;
+}
+
+.overflow {
+  max-height: 400px;
+  overflow: auto;  
+}
+
+small {
+  font-style: italic;
+  font-size: 12px;
+  color: rgba(195, 195, 195, 1.000);
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.hero {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.original {
+  margin-bottom: 10px;
+}
+.card-header-info {
+  padding: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(108, 99, 255, 1.000);  
+}
+.next {
+  float: right;
+  margin-top: 10px;  
+}
+.prev {
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;  
+}
+.skip {
+  float: right;
+  margin-top: 10px;
+  font-size: 12px;
+  font-style: italic;  
+}
+
+.cfp {
+  background-color: rgba(108, 99, 255, 1.000);
+  color: white;
+}
+.cfp:hover {
+  color: white;
+}
+#root {
+  position: relative;
+  z-index: 2;
+}
+canvas {
+  position: absolute;
+  top: 0;
+  z-index: 1;  
+}
