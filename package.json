@@ -3,8 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "autodux": "5.0.1",
+    "clipboard-copy": "3.0.0",
+    "fireworks-canvas": "2.3.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-redux": "6.0.1",
+    "redux": "4.0.1",
+    "stringify-object": "3.3.0"
   },
   "devDependencies": {
     "react-scripts": "2.1.8"

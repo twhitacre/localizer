@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "The Localizer",
+  "name": "A simple app that takes a JS object, parses it and allows you to add ISO based language translations.",
   "icons": [
     {
       "src": "favicon.ico",
