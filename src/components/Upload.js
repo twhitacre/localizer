@@ -60,7 +60,8 @@ class Upload extends Component<Props> {
                   if you need more help.
                 </p>
                 <p>
-                  Otherwise... <a href="/">Try Again</a>
+                  Otherwise...{' '}
+                  <a href="https://timw.co/localizer/">Try Again</a>
                 </p>
               </div>
             )}
