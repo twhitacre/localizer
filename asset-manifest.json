@@ -1,11 +1,11 @@
 {
-  "main.js": "/localizer/static/js/main.104d1762.chunk.js",
-  "main.js.map": "/localizer/static/js/main.104d1762.chunk.js.map",
+  "main.js": "/localizer/static/js/main.498b0462.chunk.js",
+  "main.js.map": "/localizer/static/js/main.498b0462.chunk.js.map",
   "runtime~main.js": "/localizer/static/js/runtime~main.abc20cf2.js",
   "runtime~main.js.map": "/localizer/static/js/runtime~main.abc20cf2.js.map",
-  "static/js/2.88686f95.chunk.js": "/localizer/static/js/2.88686f95.chunk.js",
-  "static/js/2.88686f95.chunk.js.map": "/localizer/static/js/2.88686f95.chunk.js.map",
+  "static/js/2.2100e65e.chunk.js": "/localizer/static/js/2.2100e65e.chunk.js",
+  "static/js/2.2100e65e.chunk.js.map": "/localizer/static/js/2.2100e65e.chunk.js.map",
   "index.html": "/localizer/index.html",
-  "precache-manifest.8715adc19bf41470272ec50397b3ca10.js": "/localizer/precache-manifest.8715adc19bf41470272ec50397b3ca10.js",
+  "precache-manifest.c0f91425e370fe2653587b9db8f6655c.js": "/localizer/precache-manifest.c0f91425e370fe2653587b9db8f6655c.js",
   "service-worker.js": "/localizer/service-worker.js"
 }

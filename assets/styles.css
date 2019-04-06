@@ -86,3 +86,25 @@ canvas {
   top: 0;
   z-index: 1;  
 }
+.upload-container { position: relative; }
+.error {
+  position: absolute;
+  z-index: 999;
+  background-color: #e85e7e;
+  color: white;
+  padding: 30px;
+  border-radius: 3px;
+  font-size: 14px;
+  width: 100%;
+}
+.error a {
+  color: white;
+  text-decoration: underline;
+}
+
+.tooltip::before {
+  margin-left: 5px;
+}
+.tooltip::after {
+  margin-left: -3px !important;
+}
