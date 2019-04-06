@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ISO from '../lib/iso';
+import { actions } from '../store';
 
-import store from '../store';
+type Props = {
+  store: Object,
+  next: Function,
+  setLanguage: Function,
+};
 
-console.log('ISO', ISO);
-
-class Review extends Component {
-
+class Review extends Component<Props> {
   constructor() {
     super();
-    this.state = { languages: [], addNew: false }
+    this.state = { languages: [], addNew: false };
   }
 
   componentDidMount() {
     const { store } = this.props;
     const { data } = store;
     window.data = data;
-    const languages = Object.keys(data[Object.keys(data)[0]]); 
-    this.setState({ languages });   
+    const languages = Object.keys(data[Object.keys(data)[0]]);
+    this.setState({ languages });
   }
 
   displayLanguages(languages) {
@@ -28,7 +30,7 @@ class Review extends Component {
           {ISO[lang].name}
         </a>
       </li>
-    ))
+    ));
   }
 
   displayOptions() {
@@ -39,7 +41,7 @@ class Review extends Component {
           {`[${key}] - ${ISO[key].name}`}
         </a>
       </li>
-    ))
+    ));
   }
 
   loadLanguage(e, lang) {
@@ -54,20 +56,33 @@ class Review extends Component {
     return (
       <div className="review columns">
         <div className="column is-two-thirds">
-          {!addNew && (   
+          {!addNew && (
             <div className="card">
               <header className="card-header">
                 <p className="card-header-title">Review</p>
               </header>
               <div className="card-content overflow">
                 <div className="content">
-                  <p>{`After parsing, you have ${languages.length} languages translated.`}</p>
-                  <p>Click on the language to review/edit it, or choose to add a new language</p>
-                  <ul className="menu-list languages">{this.displayLanguages(languages)}</ul>
+                  <p>{`After parsing, we found ${
+                    languages.length
+                  } language(s) already translated.`}</p>
+                  <p>
+                    Click on the language below to review or edit it, or choose
+                    to add a new language
+                  </p>
+                  <ul className="menu-list languages">
+                    {this.displayLanguages(languages)}
+                  </ul>
                 </div>
               </div>
               <footer className="card-footer">
-                <button onClick={e => this.setState({ addNew: true })} className="button is-primary is-fullwidth">Add Language</button>
+                <button
+                  type="button"
+                  onClick={() => this.setState({ addNew: true })}
+                  className="button is-primary is-fullwidth"
+                >
+                  Add Language
+                </button>
               </footer>
             </div>
           )}
@@ -78,7 +93,9 @@ class Review extends Component {
               </header>
               <div className="card-content overflow">
                 <div className="content">
-                  <ul className="menu-list languages">{this.displayOptions()}</ul>
+                  <ul className="menu-list languages">
+                    {this.displayOptions()}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -90,7 +107,10 @@ class Review extends Component {
 }
 
 const mstp = state => ({
-  store: state.store
+  store: state.store,
 });
 
-export default connect(mstp, { ...store.actions })(Review);
+export default connect(
+  mstp,
+  { ...actions }
+)(Review);

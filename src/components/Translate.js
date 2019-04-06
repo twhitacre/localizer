@@ -1,27 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ISO from '../lib/iso';
-import store from '../store';
+import { actions } from '../store';
 
-class Translate extends Component {
+type Props = {
+  store: Object,
+  setData: Function,
+  next: Function,
+};
 
+class Translate extends Component<Props> {
   constructor() {
     super();
-    this.state = { language: {}, working: {}, key: 'en', length: 0, current: 0, val: '', complete: false };
+    this.state = {
+      language: {},
+      working: {},
+      key: 'en',
+      length: 0,
+      current: 0,
+      val: '',
+      complete: false,
+      classes: 'tooltip is-tooltip-right is-tooltip-active',
+    };
+  }
+
+  componentDidMount() {
+    const { store } = this.props;
+    const { length } = Object.keys(store.data);
+    const language = ISO[store.language];
+    const working = store.data;
+    const val = working[Object.keys(working)[0]][store.language];
+    this.setState({ language, working, key: store.language, length, val });
   }
 
   field(current) {
     const { working } = this.state;
     return Object.keys(working)[current];
-  }
-
-  componentDidMount() {
-    const { store } = this.props;
-    const language = ISO[store.language];
-    const length = Object.keys(store.data).length;
-    const working = store.data;
-    const val = working[Object.keys(working)[0]][store.language]
-    this.setState({ language, working, key: store.language, length, val });
   }
 
   updateData(e) {
@@ -41,11 +55,11 @@ class Translate extends Component {
     const num = next ? current + 1 : current - 1;
     if (num < 0) return;
     if (num > length - 1) {
-      this.setState({ complete: true })
+      this.setState({ complete: true });
     } else {
       const field = this.field(num);
       const val = working[field][key] || '';
-      this.setState({ current: num, val });
+      this.setState({ current: num, val, classes: '' });
     }
   }
 
@@ -56,7 +70,7 @@ class Translate extends Component {
 
   updateVal(e) {
     e.preventDefault();
-    this.setState({ val: e.target.value })
+    this.setState({ val: e.target.value });
   }
 
   complete(e) {
@@ -66,7 +80,16 @@ class Translate extends Component {
   }
 
   render() {
-    const { language, key, current, length, working, val, complete } = this.state;
+    const {
+      language,
+      key,
+      current,
+      length,
+      working,
+      val,
+      complete,
+      classes,
+    } = this.state;
     const field = this.field(current);
     return (
       <div className="translate columns">
@@ -74,7 +97,9 @@ class Translate extends Component {
           <div className="card">
             <header className="card-header">
               <p className="card-header-title">
-                <span className="tag is-primary">{`${language.name} (${key})`}</span>
+                <span className="tag is-primary">{`${
+                  language.name
+                } (${key})`}</span>
               </p>
               <p className="card-header-info">
                 {`${current + 1} of ${length}`}
@@ -86,18 +111,49 @@ class Translate extends Component {
                   {field && (
                     <div className="control">
                       <p className="original">
-                        <strong>{working[field]['en']}</strong>
+                        <strong
+                          className={classes}
+                          data-tooltip="Original Translation"
+                        >
+                          {working[field].en}
+                        </strong>
                       </p>
                       <form onSubmit={e => this.updateData(e)}>
-                        <input onChange={e => this.updateVal(e)} className="input is-primary" type="text" placeholder="Translation..." value={val} />
-                        <small>Enter translation and press ENTER or click the button to continue.</small>
+                        <input
+                          onChange={e => this.updateVal(e)}
+                          className="input is-primary"
+                          type="text"
+                          placeholder="Translation..."
+                          value={val}
+                        />
+                        <small>
+                          Enter translation and press ENTER or click the button
+                          to continue.
+                        </small>
                         {complete && (
-                         <a onClick={e => this.complete(e)} href="/" className="button is-primary next">Finish</a> 
+                          <a
+                            onClick={e => this.complete(e)}
+                            href="/"
+                            className="button is-primary next"
+                          >
+                            Finish
+                          </a>
                         )}
                         {!complete && (
-                          <button className="button is-primary next">Next</button>
+                          <button
+                            type="submit"
+                            className="button is-primary next"
+                          >
+                            Next
+                          </button>
                         )}
-                        <a onClick={e => this.prev(e, current)} href="/" className="button is-secondary prev">Previous</a>
+                        <a
+                          onClick={e => this.prev(e, current)}
+                          href="/"
+                          className="button is-secondary prev"
+                        >
+                          Previous
+                        </a>
                       </form>
                     </div>
                   )}
@@ -105,7 +161,9 @@ class Translate extends Component {
               </div>
             </div>
           </div>
-          <a onClick={e => this.complete(e)} href="/" className="skip">Skip to Finish</a>
+          <a onClick={e => this.complete(e)} href="/" className="skip">
+            Skip to Finish
+          </a>
         </div>
       </div>
     );
@@ -114,6 +172,9 @@ class Translate extends Component {
 
 const mstp = state => ({
   store: state.store,
-})
+});
 
-export default connect(mstp, { ...store.actions })(Translate);
+export default connect(
+  mstp,
+  { ...actions }
+)(Translate);

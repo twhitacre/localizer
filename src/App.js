@@ -5,7 +5,7 @@ import Process from './components/Process';
 import store from './store';
 
 const reduxStore = createStore(
-  combineReducers({store: store.reducer}),
+  combineReducers({ store: store.reducer }),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

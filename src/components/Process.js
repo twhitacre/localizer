@@ -7,15 +7,14 @@ import Translate from './Translate';
 import Finish from './Finish';
 
 class Process extends Component {
-
   constructor() {
     super();
-    this.state = { step: 1 }
+    this.state = { step: 1 };
   }
 
   nextStep() {
     const { step } = this.state;
-    this.setState({ step: step + 1 })
+    this.setState({ step: step + 1 });
   }
 
   render() {

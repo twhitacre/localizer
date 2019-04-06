@@ -1,6 +1,6 @@
 import autodux from 'autodux';
 
-export default autodux({
+const store = autodux({
   slice: 'store',
   initial: {
     name: 'Localizer',
@@ -9,3 +9,6 @@ export default autodux({
     data: {},
   },
 });
+
+export const { actions } = store;
+export default store;
