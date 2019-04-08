@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "132a8afaa0f56edb61f5",
-    "url": "/localizer/static/js/main.2616d2ff.chunk.js"
+    "revision": "ffdfa6d16060e97176ea",
+    "url": "/localizer/static/js/main.42fd89f9.chunk.js"
   },
   {
     "revision": "fcafe1873c153e470b4a",
@@ -12,7 +12,7 @@ self.__precacheManifest = [
     "url": "/localizer/static/js/2.2100e65e.chunk.js"
   },
   {
-    "revision": "96827a1b5f5be3f639c0064e8d54fbf1",
+    "revision": "da0c82d8bc6066420ac8aafc1a5955f8",
     "url": "/localizer/index.html"
   }
 ];
