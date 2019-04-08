@@ -7,21 +7,29 @@ type Props = {
   store: Object,
   next: Function,
   setLanguage: Function,
+  local: Boolean,
 };
 
 class Review extends Component<Props> {
   constructor() {
     super();
-    this.state = { languages: [], addNew: false };
+    this.state = { languages: [], addNew: false, local: false };
   }
 
   componentDidMount() {
-    const { store } = this.props;
+    const { store, local } = this.props;
+    if (local) {
+      this.setState({ local: true });
+    }
     const { data } = store;
     window.data = data;
     const languages = Object.keys(data[Object.keys(data)[0]]);
     this.setState({ languages });
   }
+
+  reset = () => {
+    localStorage.removeItem('lclData');
+  };
 
   displayLanguages(languages) {
     return languages.map((lang, i) => (
@@ -52,17 +60,29 @@ class Review extends Component<Props> {
   }
 
   render() {
-    const { languages, addNew } = this.state;
+    const { languages, addNew, local } = this.state;
     return (
       <div className="review columns">
         <div className="column is-two-thirds">
           {!addNew && (
             <div className="card">
               <header className="card-header">
-                <p className="card-header-title">Review</p>
+                <p className="card-header-title">Data Review</p>
               </header>
               <div className="card-content overflow">
                 <div className="content">
+                  {local && (
+                    <p className="notice">
+                      <strong>LOCAL STORAGE FOUND</strong> <br />
+                      It looks like you might have been in the middle of a
+                      translation before. <br />
+                      Feel free to continue, or{' '}
+                      <a href="/" onClick={() => this.reset()}>
+                        click here
+                      </a>{' '}
+                      to restart.
+                    </p>
+                  )}
                   <p>{`After parsing, we found ${
                     languages.length
                   } language(s) already translated.`}</p>

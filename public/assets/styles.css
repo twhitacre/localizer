@@ -108,3 +108,9 @@ canvas {
 .tooltip::after {
   margin-left: -3px !important;
 }
+
+.notice {
+  background-color: #fff2d3;
+  padding: 15px;
+  border-radius: 5px;
+}

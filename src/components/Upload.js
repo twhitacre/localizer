@@ -19,6 +19,19 @@ class Upload extends Component<Props> {
     };
   }
 
+  componentDidMount() {
+    this.checkForPrevious();
+  }
+
+  checkForPrevious() {
+    const { next, setData } = this.props;
+    const data = localStorage.getItem('lclData');
+    if (data) {
+      setData(JSON.parse(data));
+      next(true);
+    }
+  }
+
   processCode(e) {
     e.preventDefault();
     const { code } = this.state;
@@ -34,6 +47,7 @@ class Upload extends Component<Props> {
   validateCode(localize) {
     const { next, setData } = this.props;
     if (localize) {
+      localStorage.setItem('lclData', JSON.stringify(localize));
       setData(localize);
       next();
     } else {
