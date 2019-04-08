@@ -34,7 +34,7 @@ class Review extends Component<Props> {
   displayLanguages(languages) {
     return languages.map((lang, i) => (
       <li key={i}>
-        <a href="/" onClick={e => this.loadLanguage(e, lang)}>
+        <a href="/localizer" onClick={e => this.loadLanguage(e, lang)}>
           {ISO[lang].name}
         </a>
       </li>
@@ -45,7 +45,7 @@ class Review extends Component<Props> {
     const keys = Object.keys(ISO);
     return keys.map((key, i) => (
       <li key={i}>
-        <a href="/" onClick={e => this.loadLanguage(e, key)}>
+        <a href="/localizer" onClick={e => this.loadLanguage(e, key)}>
           {`[${key}] - ${ISO[key].name}`}
         </a>
       </li>
@@ -77,7 +77,7 @@ class Review extends Component<Props> {
                       It looks like you might have been in the middle of a
                       translation before. <br />
                       Feel free to continue, or{' '}
-                      <a href="/" onClick={() => this.reset()}>
+                      <a href="/localizer" onClick={() => this.reset()}>
                         click here
                       </a>{' '}
                       to restart.

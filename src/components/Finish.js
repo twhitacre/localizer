@@ -86,11 +86,11 @@ class Finish extends Component<Props> {
                 </div>
               </div>
               <footer className="card-footer">
-                <a href="/" className="card-footer-item">
+                <a href="/localizer" className="card-footer-item">
                   Start Over
                 </a>
                 <a
-                  href="/"
+                  href="/localizer"
                   onClick={e => this.showData(e)}
                   className="card-footer-item cfp"
                 >
@@ -104,7 +104,7 @@ class Finish extends Component<Props> {
               <header className="card-header">
                 <p className="card-header-title">Data</p>
                 <a
-                  href="/"
+                  href="/localizer"
                   onClick={e => this.clipboard(e)}
                   className="card-header-info"
                 >

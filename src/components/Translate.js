@@ -133,7 +133,7 @@ class Translate extends Component<Props> {
                         {complete && (
                           <a
                             onClick={e => this.complete(e)}
-                            href="/"
+                            href="/localizer"
                             className="button is-primary next"
                           >
                             Finish
@@ -149,7 +149,7 @@ class Translate extends Component<Props> {
                         )}
                         <a
                           onClick={e => this.prev(e, current)}
-                          href="/"
+                          href="/localizer"
                           className="button is-secondary prev"
                         >
                           Previous
@@ -161,7 +161,7 @@ class Translate extends Component<Props> {
               </div>
             </div>
           </div>
-          <a onClick={e => this.complete(e)} href="/" className="skip">
+          <a onClick={e => this.complete(e)} href="/localizer" className="skip">
             Skip to Finish
           </a>
         </div>
