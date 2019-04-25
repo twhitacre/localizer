@@ -16,6 +16,7 @@ class Upload extends Component<Props> {
     this.state = {
       code: '',
       error: false,
+      loading: false,
     };
   }
 
@@ -34,6 +35,7 @@ class Upload extends Component<Props> {
 
   processCode(e) {
     e.preventDefault();
+    this.setState({ loading: true });
     const { code } = this.state;
     let localize = {};
     try {
@@ -49,9 +51,14 @@ class Upload extends Component<Props> {
     if (localize) {
       localStorage.setItem('lclData', JSON.stringify(localize));
       setData(localize);
-      next();
+      setTimeout(() => {
+        this.setState({ loading: false });
+        next();
+      }, 1500);
     } else {
-      this.setState({ error: true });
+      setTimeout(() => {
+        this.setState({ error: true, loading: false });
+      }, 1500);
     }
   }
 
@@ -60,7 +67,7 @@ class Upload extends Component<Props> {
   }
 
   render() {
-    const { code, error } = this.state;
+    const { code, error, loading } = this.state;
     return (
       <div className="upload columns">
         <div className="field column is-two-thirds">
@@ -76,6 +83,11 @@ class Upload extends Component<Props> {
                 <p>
                   Otherwise... <a href="/localizer/">Try Again</a>
                 </p>
+              </div>
+            )}
+            {loading && (
+              <div className="loading">
+                <img src="assets/preloader.gif" alt="loading..." />
               </div>
             )}
             <textarea

@@ -114,3 +114,15 @@ canvas {
   padding: 15px;
   border-radius: 5px;
 }
+
+.loading {
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  min-height: 100%;
+  text-align: center;
+  background-color: rgba(108, 99, 255, 0.300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
