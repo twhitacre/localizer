@@ -8,6 +8,7 @@
     "clipboard-copy": "3.0.0",
     "fireworks-canvas": "2.3.1",
     "gh-pages": "2.0.1",
+    "ramda": "0.26.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "6.0.1",
@@ -15,7 +16,6 @@
     "stringify-object": "3.3.0"
   },
   "devDependencies": {
-    "react-scripts": "2.1.8",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "4.0.0",
     "eslint-import-resolver-babel-module": "5.0.1",
@@ -24,7 +24,8 @@
     "eslint-plugin-prettier": "3.0.1",
     "eslint-plugin-react": "7.12.4",
     "eslint-plugin-react-native": "3.6.0",
-    "prettier": "1.16.4"
+    "prettier": "1.16.4",
+    "react-scripts": "2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",

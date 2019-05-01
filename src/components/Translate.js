@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as R from 'ramda';
 import ISO from '../lib/iso';
 import { actions } from '../store';
-import { filterObj } from '../lib/utils';
 
 type Props = {
   store: Object,
@@ -14,6 +14,7 @@ class Translate extends Component<Props> {
   constructor() {
     super();
     this.state = {
+      partial: false,
       language: {},
       working: {},
       key: 'en',
@@ -33,14 +34,24 @@ class Translate extends Component<Props> {
       incomplete.length > 0 ? incomplete : Object.keys(store.data);
 
     let working;
+    let partial;
     if (incomplete.length > 0) {
-      // working = filterObj(store.data, )
+      working = R.pick(incomplete, store.data);
+      partial = true;
     } else {
       working = store.data;
+      partial = false;
     }
 
     const val = working[Object.keys(working)[0]][store.language];
-    this.setState({ language, working, key: store.language, length, val });
+    this.setState({
+      partial,
+      language,
+      working,
+      key: store.language,
+      length,
+      val,
+    });
   }
 
   field(current) {
@@ -50,13 +61,19 @@ class Translate extends Component<Props> {
 
   updateData(e) {
     e.preventDefault();
-    const { key, working, current, val } = this.state;
-    const { setData } = this.props;
+    const { key, working, current, val, partial } = this.state;
+    const { setData, store } = this.props;
     const field = this.field(current);
     working[field][key] = val;
     this.setState({ working }, () => {
-      setData(working);
-      localStorage.setItem('lclData', JSON.stringify(working));
+      let data;
+      if (partial) {
+        data = R.merge(store.data, working);
+      } else {
+        data = working;
+      }
+      setData(data);
+      localStorage.setItem('lclData', JSON.stringify(data));
       this.change(current);
     });
   }
@@ -92,6 +109,7 @@ class Translate extends Component<Props> {
 
   render() {
     const {
+      partial,
       language,
       key,
       current,
@@ -108,9 +126,10 @@ class Translate extends Component<Props> {
           <div className="card">
             <header className="card-header">
               <p className="card-header-title">
-                <span className="tag is-primary">{`${
+                <span className="tag is-primary space-r">{`${
                   language.name
                 } (${key})`}</span>
+                {partial && <span> - Incomplete Only</span>}
               </p>
               <p className="card-header-info">
                 {`${current + 1} of ${length}`}

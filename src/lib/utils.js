@@ -14,8 +14,3 @@ export const validate = (data, language) => {
   console.log('COUNT', count);
   return count;
 };
-
-export const filterObj = (obj, predicate) =>
-  Object.keys(obj)
-    .filter(key => predicate(obj[key]))
-    .reduce((res, key) => ((res[key] = obj[key]), res), {});
