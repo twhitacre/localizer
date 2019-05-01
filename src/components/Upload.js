@@ -24,6 +24,11 @@ class Upload extends Component<Props> {
     this.checkForPrevious();
   }
 
+  reload = e => {
+    e.preventDefault();
+    window.location.reload();
+  };
+
   checkForPrevious() {
     const { next, setData } = this.props;
     const data = localStorage.getItem('lclData');
@@ -81,7 +86,10 @@ class Upload extends Component<Props> {
                   if you need more help.
                 </p>
                 <p>
-                  Otherwise... <a href="/localizer/">Try Again</a>
+                  Otherwise...{' '}
+                  <a href="/localizer/" onClick={e => this.reload(e)}>
+                    Try Again
+                  </a>
                 </p>
               </div>
             )}

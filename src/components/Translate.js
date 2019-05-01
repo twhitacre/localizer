@@ -46,6 +46,7 @@ class Translate extends Component<Props> {
     working[field][key] = val;
     this.setState({ working }, () => {
       setData(working);
+      localStorage.setItem('lclData', JSON.stringify(working));
       this.change(current);
     });
   }
