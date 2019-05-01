@@ -7,6 +7,7 @@ const store = autodux({
     version: '0.0.1',
     language: 'en',
     data: {},
+    incomplete: [],
   },
 });
 

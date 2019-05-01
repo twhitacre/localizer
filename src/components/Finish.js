@@ -4,6 +4,7 @@ import stringify from 'stringify-object';
 import copy from 'clipboard-copy';
 import * as FireworksCanvas from 'fireworks-canvas';
 
+import { validate } from '../lib/utils';
 import { actions } from '../store';
 
 type Props = {
@@ -36,16 +37,9 @@ class Finish extends Component<Props> {
   };
 
   validate() {
-    const { count } = this.state;
     const { store } = this.props;
     const { language, data } = store;
-
-    Object.keys(data).forEach(key => {
-      if (data[key][language]) {
-        count.complete += 1;
-      }
-      count.total += 1;
-    });
+    const count = validate(data, language);
     this.setState({ count });
   }
 

@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ISO from '../lib/iso';
 import { actions } from '../store';
+import { validate } from '../lib/utils';
 
 type Props = {
   store: Object,
   next: Function,
   setLanguage: Function,
+  setIncomplete: Function,
   local: Boolean,
 };
 
@@ -22,7 +24,6 @@ class Review extends Component<Props> {
       this.setState({ local: true });
     }
     const { data } = store;
-    window.data = data;
     const languages = Object.keys(data[Object.keys(data)[0]]);
     this.setState({ languages });
   }
@@ -32,13 +33,38 @@ class Review extends Component<Props> {
   };
 
   displayLanguages(languages) {
-    return languages.map((lang, i) => (
-      <li key={i}>
-        <a href="/localizer" onClick={e => this.loadLanguage(e, lang)}>
-          {ISO[lang].name}
-        </a>
-      </li>
-    ));
+    const { store } = this.props;
+    const { data } = store;
+    return languages.map((lang, i) => {
+      const count = validate(data, lang);
+      const klass = count.percent === 100 ? 'success' : 'danger';
+      return (
+        <tr key={i}>
+          <td>{ISO[lang].name}</td>
+          <td>
+            <span className={`tag is-${klass}`}>{`${count.percent}%`}</span>
+          </td>
+          <td>
+            <a
+              href="/localizer"
+              onClick={e => this.loadLanguage(e, lang)}
+              className="button is-text"
+            >
+              Edit All
+            </a>
+            {count.percent !== 100 && (
+              <a
+                href="/localizer"
+                onClick={e => this.startReview(e, lang, count.incompleteData)}
+                className="button is-text"
+              >
+                Finish Incomplete
+              </a>
+            )}
+          </td>
+        </tr>
+      );
+    });
   }
 
   displayOptions() {
@@ -56,6 +82,14 @@ class Review extends Component<Props> {
     const { next, setLanguage } = this.props;
     e.preventDefault();
     setLanguage(lang);
+    next();
+  }
+
+  startReview(e, lang, incomplete) {
+    const { next, setLanguage, setIncomplete } = this.props;
+    e.preventDefault();
+    setLanguage(lang);
+    setIncomplete(incomplete);
     next();
   }
 
@@ -85,14 +119,17 @@ class Review extends Component<Props> {
                   )}
                   <p>{`After parsing, we found ${
                     languages.length
-                  } language(s) already translated.`}</p>
-                  <p>
-                    Click on the language below to review or edit it, or choose
-                    to add a new language
-                  </p>
-                  <ul className="menu-list languages">
-                    {this.displayLanguages(languages)}
-                  </ul>
+                  } language(s) with translations.`}</p>
+                  <table className="languages">
+                    <thead>
+                      <tr>
+                        <th>Language</th>
+                        <th>Complete</th>
+                        <th>Options</th>
+                      </tr>
+                    </thead>
+                    <tbody>{this.displayLanguages(languages)}</tbody>
+                  </table>
                 </div>
               </div>
               <footer className="card-footer">

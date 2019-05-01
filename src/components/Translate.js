@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ISO from '../lib/iso';
 import { actions } from '../store';
+import { filterObj } from '../lib/utils';
 
 type Props = {
   store: Object,
@@ -26,9 +27,18 @@ class Translate extends Component<Props> {
 
   componentDidMount() {
     const { store } = this.props;
-    const { length } = Object.keys(store.data);
     const language = ISO[store.language];
-    const working = store.data;
+    const { incomplete } = store;
+    const { length } =
+      incomplete.length > 0 ? incomplete : Object.keys(store.data);
+
+    let working;
+    if (incomplete.length > 0) {
+      // working = filterObj(store.data, )
+    } else {
+      working = store.data;
+    }
+
     const val = working[Object.keys(working)[0]][store.language];
     this.setState({ language, working, key: store.language, length, val });
   }
