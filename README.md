@@ -1,36 +1,31 @@
 # The Localizer
 
-This is a simple tool that will help you add localizations to your JavaScript projects.
+This is a simple tool that will help you add localizations to your projects.
 
 Currently, this app only works with English -> [Another Language]
 
 ## How it Works
 
-First, you need paste in a JavaScript object. Note, that I said JavaScript and not JSON. This is because, most users will store this as an object in their code and I don't want to add extra steps.
+First, you need to copy & paste in a JSON file.
 
 It should mimic the following structure:
 
 ```
 {
-
-  property: {
-    en: 'translated text',
-    sp: 'translated text',
+  "property": {
+    "en": "translated text",
+    "sp": "translated text",
   },
-
-  property2: {
-    en: 'translated text',
-    sp: 'translated text',
+  "property2": {
+    "en": "translated text",
+    "sp": "translated text",
   }
-
 }
 ```
 
 Note, that `en` is required for each property, as that is what we show when translating.
 
 The original version was written in about 2 hours and there is no tests written and very few error checks. Sorry. It does however work pretty well. If it gets used, maybe I'll go back and make it a bit more secure.
-
-Also, a quick note that the way the code is parsed is by using the `eval()` function. This is a known dangerous function, so be careful where you deploy it.
 
 ## Contributing
 

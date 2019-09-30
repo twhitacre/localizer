@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import stringify from 'stringify-object';
 import copy from 'clipboard-copy';
 import * as FireworksCanvas from 'fireworks-canvas';
 
@@ -53,7 +52,7 @@ class Finish extends Component<Props> {
   clipboard(e) {
     e.preventDefault();
     const { dump } = this.state;
-    copy(stringify(dump));
+    copy(JSON.stringify(dump, null, 2));
   }
 
   render() {
@@ -107,7 +106,7 @@ class Finish extends Component<Props> {
               </header>
               <div className="card-content overflow">
                 <div className="content">
-                  <pre>{stringify(dump, { indent: '  ' })}</pre>
+                  <pre>{JSON.stringify(dump, null, 2)}</pre>
                 </div>
               </div>
             </div>

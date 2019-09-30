@@ -1,5 +1,3 @@
-/* eslint-disable no-eval */
-// We need eval for this to work.
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../store';
@@ -44,7 +42,7 @@ class Upload extends Component<Props> {
     const { code } = this.state;
     let localize = {};
     try {
-      eval(`localize = ${code}`);
+      localize = JSON.parse(code);
     } catch (error) {
       localize = null;
     }
