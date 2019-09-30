@@ -29,6 +29,10 @@ The original version was written in about 2 hours and there is no tests written 
 
 ## Contributing
 
+You can view the [changelog here](./CHANGELOG.md)
+
+Also, you can view a list of [todo items here](./Todo)
+
 This was made to fit a specific need, and might not hit all use-cases. Feel free to fork the project and adjust if you need something altered.
 
 If you do find a bug or want to add something (like, ahem, tests), feel free to create a PR. 
