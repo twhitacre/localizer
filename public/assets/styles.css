@@ -131,3 +131,8 @@ canvas {
   align-items: center;
   justify-content: center;
 }
+
+.version {
+  font-size: 11px;
+  padding-top: 15px;
+}
